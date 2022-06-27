@@ -26,7 +26,7 @@ public class Organizzatore {
     @Column(name = "nome", nullable = false, length = 50)
     private String nome;
 
-    @OneToMany(mappedBy = "organizzatore", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "organizzatore", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Evento> eventi;
 

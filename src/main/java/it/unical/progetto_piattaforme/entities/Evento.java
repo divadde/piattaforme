@@ -37,7 +37,7 @@ public class Evento {
     @Column(name = "massimo_posti", nullable = true)
     private int massimo_posti;
 
-    @OneToMany(mappedBy = "evento", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Biglietto> bigliettiInVendita;
 

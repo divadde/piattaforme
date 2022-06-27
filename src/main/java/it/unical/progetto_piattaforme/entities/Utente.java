@@ -39,13 +39,13 @@ public class Utente {
 
     @Basic
     @Column(name = "citta", nullable = true, length = 20)
-    private int citta;
+    private String citta;
 
     @Basic
     @Column(name = "email", nullable = true, length = 90)
     private String email;
 
-    @OneToMany(mappedBy = "utente", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Biglietto> bigliettiAcquistati;
 }
