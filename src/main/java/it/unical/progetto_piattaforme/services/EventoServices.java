@@ -31,4 +31,10 @@ public class EventoServices {
     public List<Evento> getAllEventi() {
         return eventoRepository.findAll();
     }
+
+    @Transactional(readOnly = true)
+    public List<Evento> showEventsByName(String name) {
+        return eventoRepository.findByNomeContaining(name);
+    }
+
 }

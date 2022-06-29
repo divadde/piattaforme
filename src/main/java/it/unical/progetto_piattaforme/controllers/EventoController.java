@@ -27,9 +27,18 @@ public class EventoController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Evento> getAll() {
         return eventoServices.getAllEventi();
+    }
+
+    @GetMapping("/byName")
+    public ResponseEntity getByName(@RequestParam(required = false) String name) {
+        List<Evento> result = eventoServices.showEventsByName(name);
+        if ( result.size() <= 0 ) {
+            return new ResponseEntity<>("No results!", HttpStatus.OK);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

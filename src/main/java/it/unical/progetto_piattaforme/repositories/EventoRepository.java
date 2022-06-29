@@ -11,6 +11,7 @@ import java.util.List;
 public interface EventoRepository extends JpaRepository<Evento,Integer> {
 
     List<Evento> findByNome(String nome);
+    List<Evento> findByNomeContaining(String nome);
     List<Evento> findByCitta(String nome);
     List<Evento> findByOrganizzatore(Organizzatore organizzatore);
     boolean existsByNome(String nome);
