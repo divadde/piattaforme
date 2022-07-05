@@ -1,3 +1,5 @@
+package it.unical.progetto_piattaforme.services;
+
 import it.unical.progetto_piattaforme.entities.Utente;
 import it.unical.progetto_piattaforme.repositories.UtenteRepository;
 import org.keycloak.OAuth2Constants;
@@ -23,18 +25,20 @@ public class RegistraUtenteServices {
 
     @Autowired
     private UtenteRepository utenteRepository;
+
+
     public void registra(String[] pass, String[] users, String[] ems, Utente utente){
         String usernameAdmin = ""; //todo
-        String passwordAdmin = "";
-        String clientName = "";
+        String passwordAdmin = ""; //todo
+        String clientName = ""; //todo
         String role = "user";
         String[] email = ems;
         String[] lastName = users;
         String[] password = pass;
         String serverUrl = "http://localhost:8080/auth";
-        String realm = "clinica-flutter";
+        String realm = "clinica-flutter"; //todo
         String clientId = clientName;
-        String clientSecret = "hYDskia9lgR6Mq8fBR5aSadrRfpCfXc8";
+        String clientSecret = "hYDskia9lgR6Mq8fBR5aSadrRfpCfXc8"; //todo
 
 
         Keycloak keycloak = KeycloakBuilder.builder() 
@@ -90,6 +94,8 @@ public class RegistraUtenteServices {
             // Send password reset E-Mail
             // VERIFY_EMAIL, UPDATE_PROFILE, CONFIGURE_TOTP, UPDATE_PASSWORD, TERMS_AND_CONDITIONS
 			usersRessource.get(userId).executeActionsEmail(Arrays.asList("UPDATE_PASSWORD"));
+
+            utenteRepository.save(utente);
 
         }
     }

@@ -25,6 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/eventi/**").permitAll()
                 .antMatchers("/organizzatori/**").permitAll()
                 .antMatchers("/biglietti/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/registrazione").permitAll() //todo inserito per autenticazione
                 .anyRequest().authenticated().and().oauth2ResourceServer().jwt().jwtAuthenticationConverter(new JwtAuthenticationConverter());
     }
 

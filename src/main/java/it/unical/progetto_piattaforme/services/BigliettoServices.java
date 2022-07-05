@@ -18,6 +18,8 @@ public class BigliettoServices {
     @Autowired
     private EventoRepository eventoRepository;
 
+    //metodo più importante todo aggiungi lock ottimistici
+    //TODO, forse come argomento devo passare un evento e un cliente? e non direttamente il biglietto
     @Transactional(readOnly = false)
     public Biglietto createBiglietto(Biglietto biglietto) throws PostiEsauritiException, PostoOccupatoException {
         if (bigliettoRepository.existsBySettoreAndPostoAndEvento(biglietto.getSettore(),
