@@ -1,6 +1,12 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/auth/realms/rendicontation/protocol/openid-connect/certs #todo cambiare percorso
+          issuer-uri: http://localhost:8080/auth/realms/rendicontation #todo cambiare percorso
   application:
-      name: TicketStore
+    name: TicketStore
   datasource:
     password: 'tatadada58gial'
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -8,3 +14,26 @@ spring:
     url: jdbc:mysql://localhost:3306/ticketstore?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
+
+  server:
+    #ssl:
+    #key-store-password: password_certificate
+    #key-store-type: PKCS12
+    #key-store: /home/debian/ssl-cert/certificate.p12
+    compression:
+      enabled: 'true'
+    port: '9090'
+
+
+
+  keycloack:
+    resource: clinica # todo da cambiare
+
+  logging:
+    level:
+      it:
+        frankladder: DEBUG
+      org:
+        springframework: INFO
+
+  debug: false

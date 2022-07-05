@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,7 @@ public class EventoController {
     private EventoServices eventoServices;
 
     @PostMapping
-    public ResponseEntity create(@RequestBody Evento evento) { //@Valid ?
+    public ResponseEntity create(@RequestBody Evento evento) {
         try {
             Evento added = eventoServices.registraEvento(evento);
             return new ResponseEntity(added, HttpStatus.OK);
@@ -33,8 +34,13 @@ public class EventoController {
     }
 
     @GetMapping("/byName")
-    public ResponseEntity getByName(@RequestParam(required = false) String name) {
-        List<Evento> result = eventoServices.showEventsByName(name);
+    public ResponseEntity getByName(@RequestParam( name="nome", required = false ) String nome) {
+        System.out.println("Qualcuno cerca eventi all'istante " + Calendar.getInstance().getTime().getSeconds() +", col nome: "+nome);
+        List<Evento> result = eventoServices.showEventsByName(nome);
+        /*for(Evento e: result){
+            System.out.println(e);
+        }
+         */
         if ( result.size() <= 0 ) {
             return new ResponseEntity<>("No results!", HttpStatus.OK);
         }
