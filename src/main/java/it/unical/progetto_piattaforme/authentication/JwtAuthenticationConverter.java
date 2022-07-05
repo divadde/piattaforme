@@ -23,7 +23,7 @@ public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthen
     @SuppressWarnings("unchecked")
     public AbstractAuthenticationToken convert(final Jwt source) {
         Map<String, Object> resourceAccess = source.getClaim("resource_access");
-        Map<String, Object> resource = (Map<String, Object>) resourceAccess.get(CLIENT_NAME); //todo da cambiare con il nome dell'app?
+        Map<String, Object> resource = (Map<String, Object>) resourceAccess.get("ticketstore-flutter");
         Collection<String> resourceRoles = (Collection<String>) resource.get("roles");
         Set<GrantedAuthority> authorities = resourceRoles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet());
         return new JwtAuthenticationToken(source, authorities);
