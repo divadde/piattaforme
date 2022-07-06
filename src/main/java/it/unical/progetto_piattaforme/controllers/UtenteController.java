@@ -32,4 +32,9 @@ public class UtenteController {
         return utenteServices.getAllUsers();
     }
 
+    @GetMapping("/byMail")
+    public Utente getByMail(@RequestParam( name="email", required = false ) String email) {
+        return utenteServices.getUserByEmail(email);
+    }
+
 }
