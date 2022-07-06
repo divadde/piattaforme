@@ -24,7 +24,7 @@ public class BigliettoController {
     private UtenteServices utenteServices;
 
 
-    @PreAuthorize("hasAuthority('user')")
+    @PreAuthorize("hasAuthority('buyer')")
     @PostMapping
     public ResponseEntity create(@RequestBody Biglietto biglietto) { //@Valid ?
         try {
@@ -37,7 +37,7 @@ public class BigliettoController {
         }
     }
 
-    @PreAuthorize("hasAuthority('user')")
+    @PreAuthorize("hasAuthority('buyer')")
     @GetMapping
     public ResponseEntity getByEmail(@RequestParam( name="email", required = false ) String email){
         System.out.println("entra?");

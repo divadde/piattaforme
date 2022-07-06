@@ -10,11 +10,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 
 
-
 @UtilityClass
 @Log4j2
 public class Utils {
-
 
     public Jwt getPrincipal() {
         return (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
