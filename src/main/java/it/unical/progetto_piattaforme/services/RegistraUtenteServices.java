@@ -28,17 +28,17 @@ public class RegistraUtenteServices {
 
 
     public void registra(String[] pass, String[] users, String[] ems, Utente utente){
-        String usernameAdmin = ""; //todo
-        String passwordAdmin = ""; //todo
-        String clientName = ""; //todo
-        String role = "user";
+        String usernameAdmin = "davide";
+        String passwordAdmin = "123";
+        String clientName = "ticketstore-flutter";
+        String role = "buyer";
         String[] email = ems;
         String[] lastName = users;
         String[] password = pass;
         String serverUrl = "http://localhost:8080/auth";
-        String realm = "clinica-flutter"; //todo
+        String realm = "ticketstore-flutter";
         String clientId = clientName;
-        String clientSecret = "hYDskia9lgR6Mq8fBR5aSadrRfpCfXc8"; //todo
+        String clientSecret = "ld5PGgxa4X4KJok1dJEC8OtP8Jjm4Rif";
 
 
         Keycloak keycloak = KeycloakBuilder.builder() 

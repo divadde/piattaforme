@@ -32,5 +32,4 @@ public class UtenteController {
         return utenteServices.getAllUsers();
     }
 
-
 }

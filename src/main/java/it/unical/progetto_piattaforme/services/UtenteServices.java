@@ -29,6 +29,9 @@ public class UtenteServices {
         return utenteRepository.findAll();
     }
 
-
+    @Transactional(readOnly = true)
+    public Utente getUserByEmail(String email) {
+        return utenteRepository.findByEmail(email);
+    }
 
 }
