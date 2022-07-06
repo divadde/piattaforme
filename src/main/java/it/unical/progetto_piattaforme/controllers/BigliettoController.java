@@ -9,6 +9,7 @@ import it.unical.progetto_piattaforme.services.UtenteServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,8 @@ public class BigliettoController {
     @Autowired
     private UtenteServices utenteServices;
 
+
+    @PreAuthorize("hasAuthority('user')")
     @PostMapping
     public ResponseEntity create(@RequestBody Biglietto biglietto) { //@Valid ?
         try {
@@ -34,11 +37,14 @@ public class BigliettoController {
         }
     }
 
+    @PreAuthorize("hasAuthority('user')")
     @GetMapping
     public ResponseEntity getByEmail(@RequestParam( name="email", required = false ) String email){
+        System.out.println("entra?");
         Utente u = utenteServices.getUserByEmail(email);
         List<Biglietto> listaBiglietti = bigliettoServices.getBigliettiByUser(u);
-        return new ResponseEntity(u, HttpStatus.OK);
+        System.out.println(listaBiglietti.size());
+        return new ResponseEntity(listaBiglietti, HttpStatus.OK);
     }
 
 }

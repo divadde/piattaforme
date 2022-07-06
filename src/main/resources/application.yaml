@@ -3,8 +3,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost/realms/ticketstore-flutter/protocol/openid-connect/certs
-          issuer-uri: http://localhost/realms/ticketstore-flutter #la porta 8080 va messa?
+          jwk-set-uri: http://localhost:8080/realms/ticketstore-flutter/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8080/realms/ticketstore-flutter #la porta 8080 va messa?
   application:
     name: TicketStore
   datasource:

@@ -20,11 +20,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/check/simple").permitAll()
-                .antMatchers("/utenti/**").permitAll()
-                .antMatchers("/eventi/**").permitAll()
-                .antMatchers("/organizzatori/**").permitAll()
-                .antMatchers("/biglietti/**").permitAll()
+                //.antMatchers("/check/simple").permitAll()
+                //.antMatchers("/utenti/**").permitAll()
+                //.antMatchers("/eventi/**").permitAll()
+                //.antMatchers("/organizzatori/**").permitAll()
+                //.antMatchers("/biglietti/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/registrazione").permitAll() //todo inserito per autenticazione
                 .anyRequest().authenticated().and().oauth2ResourceServer().jwt().jwtAuthenticationConverter(new JwtAuthenticationConverter());
     }
@@ -33,8 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(false);
-        configuration.addAllowedOrigin("*");
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedOriginPattern("*");
+        //configuration.addAllowedOrigin("*");
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("OPTIONS");
         configuration.addAllowedMethod("GET");

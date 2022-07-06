@@ -6,6 +6,7 @@ import it.unical.progetto_piattaforme.services.EventoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
@@ -33,6 +34,8 @@ public class EventoController {
         return eventoServices.getAllEventi();
     }
 
+
+    @PreAuthorize("hasAuthority('user')")
     @GetMapping("/byName")
     public ResponseEntity getByName(@RequestParam( name="nome", required = false ) String nome) {
         System.out.println("Qualcuno cerca eventi all'istante " + Calendar.getInstance().getTime().getSeconds() +", col nome: "+nome);
