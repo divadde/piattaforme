@@ -2,6 +2,7 @@ package it.unical.progetto_piattaforme.services;
 
 import it.unical.progetto_piattaforme.entities.Biglietto;
 import it.unical.progetto_piattaforme.entities.Evento;
+import it.unical.progetto_piattaforme.entities.Utente;
 import it.unical.progetto_piattaforme.exceptions.PostiEsauritiException;
 import it.unical.progetto_piattaforme.exceptions.PostoOccupatoException;
 import it.unical.progetto_piattaforme.repositories.BigliettoRepository;
@@ -9,6 +10,8 @@ import it.unical.progetto_piattaforme.repositories.EventoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -34,6 +37,11 @@ public class BigliettoServices {
         Biglietto bigliettoDaAcq = bigliettoRepository.save(biglietto);
         realEv.setPosti_occupati(realEv.getPosti_occupati()+1);
         return bigliettoDaAcq;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Biglietto> getBigliettiByUser(Utente u){
+        return bigliettoRepository.findByUtente(u);
     }
 
 }

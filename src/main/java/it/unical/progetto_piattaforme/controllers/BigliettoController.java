@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/biglietti")
 public class BigliettoController {
@@ -35,6 +37,7 @@ public class BigliettoController {
     @GetMapping
     public ResponseEntity getByEmail(@RequestParam( name="email", required = false ) String email){
         Utente u = utenteServices.getUserByEmail(email);
+        List<Biglietto> listaBiglietti = bigliettoServices.getBigliettiByUser(u);
         return new ResponseEntity(u, HttpStatus.OK);
     }
 
