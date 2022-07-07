@@ -28,7 +28,9 @@ public class BigliettoController {
     @PostMapping
     public ResponseEntity create(@RequestBody Biglietto biglietto) { //@Valid ?
         try {
+            System.out.println("proviamo a fare il biglietto");
             Biglietto added = bigliettoServices.createBiglietto(biglietto);
+            System.out.println("biglietto creato");
             return new ResponseEntity(added, HttpStatus.OK);
         } catch (PostiEsauritiException e1) {
             return new ResponseEntity<>("NO_SEATS_AVAILABLE", HttpStatus.BAD_REQUEST);

@@ -34,8 +34,11 @@ public class BigliettoServices {
         if(postiDisp <= 0){
             throw new PostiEsauritiException();
         }
+        System.out.println("ok1");
         Biglietto bigliettoDaAcq = bigliettoRepository.save(biglietto);
+        System.out.println("ok2");
         realEv.setPosti_occupati(realEv.getPosti_occupati()+1);
+        System.out.println("ok3");
         return bigliettoDaAcq;
     }
 
