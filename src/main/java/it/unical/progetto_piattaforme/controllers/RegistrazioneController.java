@@ -19,11 +19,11 @@ public class RegistrazioneController {
     //todo verifica
     @PostMapping("/registrazione")
     public @ResponseBody ResponseEntity registrazione(@RequestBody User u){
-        String pass[] = {u.password};
-        String users[] = {u.username};
-        String mails[] = {u.email};
+        System.out.println("Qualcuno si vuole registrare");
+        String pass = u.password;
+        String user = u.username;
         try {
-            registraUtenteServices.registra(pass, users, mails, u.utente);
+            registraUtenteServices.registra(pass, user, u.utente);
         }catch(Exception e){
             return new ResponseEntity("errore di registrazione", HttpStatus.BAD_REQUEST);
         }
@@ -33,16 +33,11 @@ public class RegistrazioneController {
 
     private static class User{
         Utente utente;
-        String email;
         String username;
         String password;
 
         public void setUtente(Utente utente){
             this.utente = utente;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
         }
 
         public void setUsername(String username) {
@@ -51,10 +46,6 @@ public class RegistrazioneController {
 
         public void setPassword(String password) {
             this.password = password;
-        }
-
-        public String getEmail() {
-            return email;
         }
 
         public String getUsername() {

@@ -27,15 +27,16 @@ public class RegistraUtenteServices {
     private UtenteRepository utenteRepository;
 
 
-    public void registra(String[] pass, String[] users, String[] ems, Utente utente){
-        String usernameAdmin = "davide";
-        String passwordAdmin = "123";
+    //todo modificato. verifica correttezza
+    public void registra(String pass, String username, Utente utente){
+        String usernameAdmin = "david";
+        String passwordAdmin = "sayan";
         String clientName = "ticketstore-flutter";
         String role = "buyer";
-        String[] email = ems;
-        String[] lastName = users;
-        String[] password = pass;
-        String serverUrl = "http://localhost:8080/auth";
+        String email = utente.getEmail();
+        String lastName = username;
+        String password = pass;
+        String serverUrl = "http://localhost:8080/"; //todo verifica se è giusto l'indirizzo "con o senza /auth?"
         String realm = "ticketstore-flutter";
         String clientId = clientName;
         String clientSecret = "ld5PGgxa4X4KJok1dJEC8OtP8Jjm4Rif";
@@ -51,53 +52,65 @@ public class RegistraUtenteServices {
                 .password(passwordAdmin) 
                 .build();
 
-        for (int i = 0; i < email.length; i++) {
-            // Define user
-            UserRepresentation user = new UserRepresentation();
-            user.setEnabled(true);
-            user.setUsername(email[i]);
-            user.setEmail(email[i]);
+        System.out.println("Keycloak builder");
+        // Define user
+        UserRepresentation user = new UserRepresentation();
+        user.setEnabled(true);
+        user.setUsername(username); //todo modificato
+        user.setEmail(email);
 
-            user.setAttributes(Collections.singletonMap("origin", Arrays.asList("demo")));
+        user.setAttributes(Collections.singletonMap("origin", Arrays.asList("demo")));
 
-            // Get realm
-            RealmResource realmResource = keycloak.realm(realm);
-            UsersResource usersRessource = realmResource.users();
+        System.out.println("Define user");
 
-            // Create user (requires manage-users role)
-            Response response = usersRessource.create(user);
-            System.out.printf("Repsonse: %s %s%n", response.getStatus(), response.getStatusInfo());
-            System.out.println(response.getLocation());
-            String userId = CreatedResponseUtil.getCreatedId(response);
-            System.out.printf("User created with userId: %s%n", userId);
+        // Get realm
+        RealmResource realmResource = keycloak.realm(realm);
+        UsersResource usersRessource = realmResource.users();
 
-            // Define password credential
-            CredentialRepresentation passwordCred = new CredentialRepresentation();
-            passwordCred.setTemporary(true);
-            passwordCred.setType(CredentialRepresentation.PASSWORD);
-            passwordCred.setValue(password[i]);
 
-            UserResource userResource = usersRessource.get(userId);
+        System.out.println("Get realm");
 
-            // Set password credential
-            userResource.resetPassword(passwordCred);
 
-            // Get client
-            ClientRepresentation app1Client = realmResource.clients().findByClientId(clientName).get(0);
+        // Create user (requires manage-users role)
+        Response response = usersRessource.create(user);
 
-            // Get client level role (requires view-clients role)
-            RoleRepresentation userClientRole = realmResource.clients().get(app1Client.getId()).roles().get(role).toRepresentation();
+        System.out.println("Response?");
 
-			// Assign client level role to user
-            userResource.roles().clientLevel(app1Client.getId()).add(Arrays.asList(userClientRole));
+        System.out.printf("Repsonse: %s %s%n", response.getStatus(), response.getStatusInfo());
+        System.out.println(response.getLocation());
+        String userId = CreatedResponseUtil.getCreatedId(response);
+        System.out.printf("User created with userId: %s%n", userId);
 
-            // Send password reset E-Mail
-            // VERIFY_EMAIL, UPDATE_PROFILE, CONFIGURE_TOTP, UPDATE_PASSWORD, TERMS_AND_CONDITIONS
-			usersRessource.get(userId).executeActionsEmail(Arrays.asList("UPDATE_PASSWORD"));
 
-            utenteRepository.save(utente);
+        // Define password credential
+        CredentialRepresentation passwordCred = new CredentialRepresentation();
+        passwordCred.setTemporary(false);
+        passwordCred.setType(CredentialRepresentation.PASSWORD);
+        passwordCred.setValue(password);
 
-        }
+        UserResource userResource = usersRessource.get(userId);
+
+
+        // Set password credential
+        userResource.resetPassword(passwordCred);
+
+        // Get client
+        ClientRepresentation app1Client = realmResource.clients().findByClientId(clientName).get(0);
+
+        // Get client level role (requires view-clients role)
+        RoleRepresentation userClientRole = realmResource.clients().get(app1Client.getId()).roles().get(role).toRepresentation();
+
+        // Assign client level role to user
+        userResource.roles().clientLevel(app1Client.getId()).add(Arrays.asList(userClientRole));
+
+        // Send password reset E-Mail
+        // VERIFY_EMAIL, UPDATE_PROFILE, CONFIGURE_TOTP, UPDATE_PASSWORD, TERMS_AND_CONDITIONS
+        usersRessource.get(userId).executeActionsEmail(Arrays.asList("UPDATE_PASSWORD"));
+
+        utenteRepository.save(utente);
+
+        System.out.println("Registrazione completata");
+
     }
     
     
