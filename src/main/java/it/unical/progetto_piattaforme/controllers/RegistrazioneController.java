@@ -24,6 +24,7 @@ public class RegistrazioneController {
         String user = u.username;
         try {
             registraUtenteServices.registra(pass, user, u.utente);
+            System.out.println("registrazione avvenuta");
         }catch(Exception e){
             return new ResponseEntity("errore di registrazione", HttpStatus.BAD_REQUEST);
         }

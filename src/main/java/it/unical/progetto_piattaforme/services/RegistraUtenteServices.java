@@ -105,7 +105,7 @@ public class RegistraUtenteServices {
 
         // Send password reset E-Mail
         // VERIFY_EMAIL, UPDATE_PROFILE, CONFIGURE_TOTP, UPDATE_PASSWORD, TERMS_AND_CONDITIONS
-        usersRessource.get(userId).executeActionsEmail(Arrays.asList("UPDATE_PASSWORD"));
+        //usersRessource.get(userId).executeActionsEmail(Arrays.asList("UPDATE_PASSWORD"));
 
         utenteRepository.save(utente);
 

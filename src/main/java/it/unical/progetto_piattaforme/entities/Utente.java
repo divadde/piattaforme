@@ -34,15 +34,15 @@ public class Utente {
     private String cognome;
 
     @Basic
-    @Column(name = "eta", nullable = true)
+    @Column(name = "eta", nullable = false)
     private int eta;
 
     @Basic
-    @Column(name = "citta", nullable = true, length = 20)
+    @Column(name = "citta", nullable = false, length = 20)
     private String citta;
 
     @Basic
-    @Column(name = "email", nullable = true, length = 90)
+    @Column(name = "email", nullable = false, length = 90)
     private String email;
 
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)

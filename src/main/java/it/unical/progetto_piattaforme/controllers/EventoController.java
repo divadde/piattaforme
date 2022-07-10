@@ -35,7 +35,7 @@ public class EventoController {
     }
 
 
-    @PreAuthorize("hasAuthority('buyer')")
+    //@PreAuthorize("hasAuthority('buyer')")
     @GetMapping("/byName")
     public ResponseEntity getByName(@RequestParam( name="nome", required = false ) String nome) {
         System.out.println("Qualcuno cerca eventi all'istante " + Calendar.getInstance().getTime().getSeconds() +", col nome: "+nome);
