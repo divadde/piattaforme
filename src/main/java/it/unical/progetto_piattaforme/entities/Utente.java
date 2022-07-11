@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "utente", schema = "ticketstore")
 public class Utente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -45,6 +46,8 @@ public class Utente {
     @Column(name = "email", nullable = false, length = 90)
     private String email;
 
+
+    //todo capisci cosa fare
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Biglietto> bigliettiAcquistati;

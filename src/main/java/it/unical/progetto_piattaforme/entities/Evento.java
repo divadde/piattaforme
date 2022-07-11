@@ -30,11 +30,11 @@ public class Evento {
     private String citta;
 
     @Basic
-    @Column(name = "posti_occupati", nullable = true)
+    @Column(name = "posti_occupati", nullable = false)
     private int posti_occupati;
 
     @Basic
-    @Column(name = "massimo_posti", nullable = true)
+    @Column(name = "massimo_posti", nullable = false)
     private int massimo_posti;
 
     @OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
