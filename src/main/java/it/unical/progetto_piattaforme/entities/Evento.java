@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Getter
@@ -25,6 +27,14 @@ public class Evento {
     @Column(name = "version", nullable = false)
     @JsonIgnore
     private long version;
+
+    @Basic
+    @Column(name = "giorno", nullable = false)
+    private Date giorno;
+
+    @Basic
+    @Column(name = "orario", nullable = false)
+    private Time orario;
 
     @Basic
     @Column(name = "nome", nullable = false, length = 50)
