@@ -28,16 +28,15 @@ public class BigliettoServices {
         if (bigliettoRepository.existsBySettoreAndPostoAndEvento(biglietto.getSettore(),
                 biglietto.getPosto(),biglietto.getEvento()))
             throw new PostoOccupatoException();
-        Evento evento = biglietto.getEvento();
-        Evento realEv = eventoRepository.getReferenceById(evento.getId());
-        int postiDisp = realEv.getMassimo_posti() - realEv.getPosti_occupati();
+        Evento evento = eventoRepository.getReferenceById(biglietto.getEvento().getId());
+        int postiDisp = evento.getMassimo_posti() - evento.getPosti_occupati();
         if(postiDisp <= 0){
             throw new PostiEsauritiException();
         }
         System.out.println("ok1");
-        Biglietto bigliettoDaAcq = bigliettoRepository.save(biglietto);
+        evento.setPosti_occupati(evento.getPosti_occupati()+1);
         System.out.println("ok2");
-        realEv.setPosti_occupati(realEv.getPosti_occupati()+1);
+        Biglietto bigliettoDaAcq = bigliettoRepository.save(biglietto);
         System.out.println("ok3");
         return bigliettoDaAcq;
     }

@@ -21,6 +21,11 @@ public class Evento {
     @Column(name = "id", nullable = false)
     private int id;
 
+    @Version
+    @Column(name = "version", nullable = false)
+    @JsonIgnore
+    private long version;
+
     @Basic
     @Column(name = "nome", nullable = false, length = 50)
     private String nome;
