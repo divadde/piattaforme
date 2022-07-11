@@ -1,6 +1,6 @@
 package it.unical.progetto_piattaforme.exceptions;
 
-public class AccountGiaEsistenteException extends Exception {
+public class AccountGiaEsistenteException extends RuntimeException {
 
     public AccountGiaEsistenteException(){}
 
