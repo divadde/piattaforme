@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 
@@ -20,9 +21,9 @@ public class BigliettoServices {
     private BigliettoRepository bigliettoRepository;
     @Autowired
     private EventoRepository eventoRepository;
+    //@Autowired
+    //private EntityManager entityManager;
 
-    //metodo più importante todo aggiungi lock ottimistici
-    //TODO, forse come argomento devo passare un evento e un cliente? e non direttamente il biglietto
     @Transactional(readOnly = false)
     public Biglietto createBiglietto(Biglietto biglietto) throws PostiEsauritiException, PostoOccupatoException {
         if (bigliettoRepository.existsBySettoreAndPostoAndEvento(biglietto.getSettore(),
@@ -33,11 +34,9 @@ public class BigliettoServices {
         if(postiDisp <= 0){
             throw new PostiEsauritiException();
         }
-        System.out.println("ok1");
         evento.setPosti_occupati(evento.getPosti_occupati()+1);
-        System.out.println("ok2");
         Biglietto bigliettoDaAcq = bigliettoRepository.save(biglietto);
-        System.out.println("ok3");
+        //entityManager.refresh(bigliettoDaAcq);
         return bigliettoDaAcq;
     }
 
