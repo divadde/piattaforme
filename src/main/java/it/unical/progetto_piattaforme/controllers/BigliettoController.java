@@ -2,6 +2,7 @@ package it.unical.progetto_piattaforme.controllers;
 
 import it.unical.progetto_piattaforme.entities.Biglietto;
 import it.unical.progetto_piattaforme.entities.Utente;
+import it.unical.progetto_piattaforme.exceptions.BigliettoGiaAcquistatoException;
 import it.unical.progetto_piattaforme.exceptions.PostiEsauritiException;
 import it.unical.progetto_piattaforme.exceptions.PostoOccupatoException;
 import it.unical.progetto_piattaforme.services.BigliettoServices;
@@ -36,6 +37,9 @@ public class BigliettoController {
             return new ResponseEntity<>("NO_SEATS_AVAILABLE", HttpStatus.BAD_REQUEST);
         } catch (PostoOccupatoException e2) {
             return new ResponseEntity<>("SEAT_ALREADY_OCCUPIED", HttpStatus.BAD_REQUEST);
+        } catch (BigliettoGiaAcquistatoException e3) {
+            return new ResponseEntity<>("TICKET_ALREADY_BOUGHT", HttpStatus.BAD_REQUEST);
+
         }
     }
 

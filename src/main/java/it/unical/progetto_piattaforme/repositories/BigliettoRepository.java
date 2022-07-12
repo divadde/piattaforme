@@ -14,6 +14,7 @@ public interface BigliettoRepository extends JpaRepository<Biglietto,Integer> {
     List<Biglietto> findBySettore(String settore);
     List<Biglietto> findByUtente(Utente utente);
     List<Biglietto> findByEvento(Evento evento);
+    boolean existsByUtenteAndEvento(Utente utente, Evento evento);
     boolean existsBySettoreAndPostoAndEvento(String settore, String posto, Evento evento);
 
 }

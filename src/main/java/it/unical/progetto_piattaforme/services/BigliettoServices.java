@@ -3,6 +3,7 @@ package it.unical.progetto_piattaforme.services;
 import it.unical.progetto_piattaforme.entities.Biglietto;
 import it.unical.progetto_piattaforme.entities.Evento;
 import it.unical.progetto_piattaforme.entities.Utente;
+import it.unical.progetto_piattaforme.exceptions.BigliettoGiaAcquistatoException;
 import it.unical.progetto_piattaforme.exceptions.PostiEsauritiException;
 import it.unical.progetto_piattaforme.exceptions.PostoOccupatoException;
 import it.unical.progetto_piattaforme.repositories.BigliettoRepository;
@@ -25,7 +26,9 @@ public class BigliettoServices {
     //private EntityManager entityManager;
 
     @Transactional(readOnly = false)
-    public Biglietto createBiglietto(Biglietto biglietto) throws PostiEsauritiException, PostoOccupatoException {
+    public Biglietto createBiglietto(Biglietto biglietto) throws PostiEsauritiException, PostoOccupatoException, BigliettoGiaAcquistatoException {
+        if (bigliettoRepository.existsByUtenteAndEvento(biglietto.getUtente(), biglietto.getEvento()))
+            throw new BigliettoGiaAcquistatoException();
         if (bigliettoRepository.existsBySettoreAndPostoAndEvento(biglietto.getSettore(),
                 biglietto.getPosto(),biglietto.getEvento()))
             throw new PostoOccupatoException();
