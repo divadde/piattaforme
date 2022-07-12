@@ -27,13 +27,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/organizzatori/**").permitAll()
                 //.antMatchers("/biglietti/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/eventi/byName").permitAll()
-                .antMatchers(HttpMethod.POST,"/registrazione").permitAll() //todo inserito per autenticazione
+                .antMatchers(HttpMethod.POST,"/registrazione").permitAll()
                 .anyRequest().authenticated().and().oauth2ResourceServer().jwt().jwtAuthenticationConverter(new JwtAuthenticationConverter());
     }
 
     @Bean
     public CorsFilter corsFilter() {
-        System.out.println("filter");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);

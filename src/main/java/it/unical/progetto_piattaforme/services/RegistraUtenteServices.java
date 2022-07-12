@@ -26,8 +26,7 @@ public class RegistraUtenteServices {
     @Autowired
     private UtenteRepository utenteRepository;
 
-
-    //todo modificato. verifica correttezza
+    //metodo per la registrazione dell'utente
     public void registra(String pass, String username, Utente utente){
         String usernameAdmin = "david";
         String passwordAdmin = "sayan";
@@ -36,7 +35,7 @@ public class RegistraUtenteServices {
         String email = utente.getEmail();
         String lastName = username;
         String password = pass;
-        String serverUrl = "http://localhost:8080/"; //todo verifica se è giusto l'indirizzo "con o senza /auth?"
+        String serverUrl = "http://localhost:8080/";
         String realm = "ticketstore-flutter";
         String clientId = clientName;
         String clientSecret = "ld5PGgxa4X4KJok1dJEC8OtP8Jjm4Rif";
@@ -56,7 +55,7 @@ public class RegistraUtenteServices {
         // Define user
         UserRepresentation user = new UserRepresentation();
         user.setEnabled(true);
-        user.setUsername(username); //todo modificato
+        user.setUsername(username);
         user.setEmail(email);
 
         user.setAttributes(Collections.singletonMap("origin", Arrays.asList("demo")));
@@ -109,7 +108,7 @@ public class RegistraUtenteServices {
 
         utenteRepository.save(utente);
 
-        System.out.println("Registrazione completata");
+        //System.out.println("Registrazione completata");
 
     }
     

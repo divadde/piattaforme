@@ -1,7 +1,6 @@
 package it.unical.progetto_piattaforme.authentication;
 
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,9 +14,6 @@ import java.util.stream.Collectors;
 
 
 public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
-    //@Value("${keycloak.resource}")
-    //private String CLIENT_NAME;
-
 
     @Override
     @SuppressWarnings("unchecked")

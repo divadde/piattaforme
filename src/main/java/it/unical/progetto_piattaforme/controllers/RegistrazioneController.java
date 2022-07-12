@@ -16,15 +16,14 @@ public class RegistrazioneController {
     @Autowired
     RegistraUtenteServices registraUtenteServices;
 
-    //todo verifica
     @PostMapping("/registrazione")
     public @ResponseBody ResponseEntity registrazione(@RequestBody User u){
-        System.out.println("Qualcuno si vuole registrare");
+        //System.out.println("Qualcuno si vuole registrare");
         String pass = u.password;
         String user = u.username;
         try {
             registraUtenteServices.registra(pass, user, u.utente);
-            System.out.println("registrazione avvenuta");
+            //System.out.println("registrazione avvenuta");
         }catch(Exception e){
             return new ResponseEntity("errore di registrazione", HttpStatus.BAD_REQUEST);
         }
